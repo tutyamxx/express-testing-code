@@ -8,7 +8,9 @@ const helmet = require("helmet");
 const apiStatus = require("./utils/status.json");
 const app = express();
 
-app.use(logger("dev"));
+// --| Skip morgan logs when running tests
+app.use(logger("dev", { skip: (req, res) => process.env.NODE_ENV === "test" }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

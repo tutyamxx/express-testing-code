@@ -5,6 +5,9 @@ const chaiHttp = require("chai-http");
 const { expect } = chai;
 chai.use(chaiHttp);
 
+// --| Skip morgan logs when running tests
+process.env.NODE_ENV = "test";
+
 describe("Testing API Endpoint Responses:", () =>
 {
     describe("GET default path of the API /api/v1/", () =>

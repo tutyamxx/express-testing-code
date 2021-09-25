@@ -11,7 +11,7 @@ const fetchFromAPI = async (url) => {
     }
 
     catch (error) {
-        console.log(error.message);
+        process.env.NODE_ENV === "test" ? null : console.log(error.message);
     }
 
     return resultData;
