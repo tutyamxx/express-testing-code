@@ -8,7 +8,7 @@ const helmet = require("helmet");
 const apiStatus = require("./utils/status.json");
 const app = express();
 
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

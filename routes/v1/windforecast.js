@@ -19,8 +19,10 @@ router.get("/wind-forecast/:postcode?", async (req, res, next) => {
     coordinatesObject.longitude = fetchCoordinates?.result?.longitude || null;
 
     const fetchWoeid = await fetchFromAPI(`https://www.metaweather.com/api/location/search/?lattlong=${coordinatesObject.latitude},${coordinatesObject.longitude}`);
+
     // --| First item from the response array is the most accurate one for the postcode specified
-    const whoeid = fetchWoeid?.[0]?.woeid || null;
+    // --| Make sure is an integer or null
+    const whoeid = parseInt(fetchWoeid?.[0]?.woeid, 10) || null;
 
     const fetchWindData = await fetchFromAPI(`https://www.metaweather.com/api/location/${whoeid}/`);
     const windData = fetchWindData?.consolidated_weather || [];
