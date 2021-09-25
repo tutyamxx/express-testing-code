@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "test": "mocha --timeout 10000 --exit"
+    "test": "export NODE_ENV=test&& mocha --exit"
   },
   "dependencies": {
     "axios": "^0.21.4",

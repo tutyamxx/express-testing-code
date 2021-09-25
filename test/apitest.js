@@ -5,9 +5,6 @@ const chaiHttp = require("chai-http");
 const { expect } = chai;
 chai.use(chaiHttp);
 
-// --| Skip morgan logs when running tests
-process.env.NODE_ENV = "test";
-
 describe("Testing API Endpoint Responses:", () =>
 {
     describe("GET default path of the API /api/v1/", () =>
@@ -26,7 +23,7 @@ describe("Testing API Endpoint Responses:", () =>
         });
     });
 
-    describe("GET hello world endpoint on /api/v1/hello-world", () =>
+    describe("GET hello-world endpoint on /api/v1/hello-world", () =>
     {
         it("Should return a message that it is working with a status code of OK (200)", (done) =>
         {
@@ -128,5 +125,7 @@ describe("Testing API Endpoint Responses:", () =>
             });
         });
     });
+
+    after(() => chai.request(app).close());
 
 });
