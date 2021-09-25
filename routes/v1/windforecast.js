@@ -41,4 +41,3 @@ router.get("/wind-forecast/:postcode?", async (req, res, next) => {
 });
 
 module.exports.router = router;
-
