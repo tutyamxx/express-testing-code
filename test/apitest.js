@@ -74,7 +74,10 @@ describe("Testing API Endpoint Responses:", () =>
                 expect(response).to.have.status(200);
                 expect(response.body).to.be.a("object");
                 expect(Object.keys(response.body).length).to.be.equal(2);
-                expect(response.body).to.have.a.property("message").and.to.be.a("array").and.to.not.be.empty.and.to.include.a("object");
+                expect(response.body).to.have.a.property("message")
+                    .and.to.be.a("array")
+                    .and.to.not.be.empty
+                    .and.to.include.a("object").to.have.members(["wind_speed", "wind_direction"]).to.all.be.a("number");
 
                 done();
             });
