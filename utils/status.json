@@ -1,0 +1,6 @@
+{
+    "not_modified": 304,
+    "not_found": 404,
+    "ok": 200,
+    "internal_server_error": 500
+}
