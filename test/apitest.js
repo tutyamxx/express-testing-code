@@ -83,7 +83,7 @@ describe("Testing API Endpoint Responses:", () =>
 
     describe("GET unknown path", () =>
     {
-        it("Should return a message endpoint is not found with a code of NOT FOUND (404)", (done) =>
+        it("Should return a message endpoint is not found with a status code of NOT FOUND (404)", (done) =>
         {
             chai.request(app).get("/api/").end((err, response) =>
             {
@@ -96,7 +96,7 @@ describe("Testing API Endpoint Responses:", () =>
             });
         });
 
-        it("Should return a message endpoint is not found with a code of NOT FOUND (404)", (done) =>
+        it("Should return a message endpoint is not found with a status code of NOT FOUND (404)", (done) =>
         {
             chai.request(app).get("/api/v2").end((err, response) =>
             {
@@ -109,7 +109,7 @@ describe("Testing API Endpoint Responses:", () =>
             });
         });
 
-        it("Should return a message endpoint is not found with a code of NOT FOUND (404)", (done) =>
+        it("Should return a message endpoint is not found with a status code of NOT FOUND (404)", (done) =>
         {
             chai.request(app).get("/api/dsadsad/v2/dsadasdsa").end((err, response) =>
             {
