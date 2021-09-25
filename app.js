@@ -25,7 +25,7 @@ const apiRoutes = require("./routes/v1/routes");
 app.use("/api/v1", apiRoutes.router);
 
 // --| 404 Response
-app.use((req, res, next) => res.sendStatus(apiStatus.not_found).json({ status: apiStatus.not_found, message: "Sorry, can't access the endpoint you are looking for" }));
+app.use((req, res, next) => res.status(apiStatus.not_found).json({ status: apiStatus.not_found, message: "Sorry, can't access the endpoint you are looking for" }));
 
 // error handler
 app.use((err, req, res, next) => {

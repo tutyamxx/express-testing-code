@@ -45,7 +45,7 @@ describe("Testing API Endpoint Responses:", () =>
         {
             chai.request(app).get("/api/v1/wind-forecast").end((err, response) =>
             {
-                expect(response).to.have.status(200);
+                expect(response).to.have.status(404);
                 expect(response.body).to.be.a("object");
                 expect(Object.keys(response.body).length).to.be.equal(2);
                 expect(response.body).to.have.a.property("message").and.to.be.a("string").and.to.be.equal("Postcode not specified");
@@ -75,6 +75,48 @@ describe("Testing API Endpoint Responses:", () =>
                 expect(response.body).to.be.a("object");
                 expect(Object.keys(response.body).length).to.be.equal(2);
                 expect(response.body).to.have.a.property("message").and.to.be.a("array").and.to.not.be.empty.and.to.include.a("object");
+
+                done();
+            });
+        });
+    });
+
+    describe("GET unknown path", () =>
+    {
+        it("Should return a message endpoint is not found with a code of NOT FOUND (404)", (done) =>
+        {
+            chai.request(app).get("/api/").end((err, response) =>
+            {
+                expect(response).to.have.status(404);
+                expect(response.body).to.be.a("object");
+                expect(Object.keys(response.body).length).to.be.equal(2);
+                expect(response.body).to.have.a.property("message").and.to.be.a("string").and.to.be.equal("Sorry, can't access the endpoint you are looking for");
+
+                done();
+            });
+        });
+
+        it("Should return a message endpoint is not found with a code of NOT FOUND (404)", (done) =>
+        {
+            chai.request(app).get("/api/v2").end((err, response) =>
+            {
+                expect(response).to.have.status(404);
+                expect(response.body).to.be.a("object");
+                expect(Object.keys(response.body).length).to.be.equal(2);
+                expect(response.body).to.have.a.property("message").and.to.be.a("string").and.to.be.equal("Sorry, can't access the endpoint you are looking for");
+
+                done();
+            });
+        });
+
+        it("Should return a message endpoint is not found with a code of NOT FOUND (404)", (done) =>
+        {
+            chai.request(app).get("/api/dsadsad/v2/dsadasdsa").end((err, response) =>
+            {
+                expect(response).to.have.status(404);
+                expect(response.body).to.be.a("object");
+                expect(Object.keys(response.body).length).to.be.equal(2);
+                expect(response.body).to.have.a.property("message").and.to.be.a("string").and.to.be.equal("Sorry, can't access the endpoint you are looking for");
 
                 done();
             });

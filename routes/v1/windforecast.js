@@ -8,7 +8,7 @@ const { fetchFromAPI } = require("../../utils/axios-wrapper");
 router.get("/wind-forecast/:postcode?", async (req, res, next) => {
 
     const postCode = req.params.postcode;
-    if (!postCode || typeof postCode !== "string" || !postCode.length) return res.json({ status: apiStatus.not_found, message: "Postcode not specified" });
+    if (!postCode || typeof postCode !== "string" || !postCode.length) return res.status(apiStatus.not_found).json({ status: apiStatus.not_found, message: "Postcode not specified" });
 
     const coordinatesObject = { latitude: null, longitude: null };
     const fetchCoordinates = await fetchFromAPI(`https://api.postcodes.io/postcodes/${postCode.trim()}`);
@@ -34,7 +34,7 @@ router.get("/wind-forecast/:postcode?", async (req, res, next) => {
         windsArray[index] = { wind_speed: element.wind_speed, wind_direction: element.wind_direction };
     });
 
-    return res.json({
+    return res.status(apiStatus.ok).json({
         status: apiStatus.ok,
         message: windsArray
     });
