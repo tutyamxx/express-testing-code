@@ -1,3 +1,10 @@
+# Unit testing sample log after fix
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/tutyamxx/express-testing-code/main/logs.png" />
+ </p>
+
+
 **Brief: Tackle each of the four tasksbelow. There is a time limit of 30 mins. You are not expected to be able to complete the entire exercise. The produced code does not need to be production-ready but should be in a state that you would be prepared to present and demonstrate to colleagues.**
 
   Localhost URL: [http://localhost:3000/](http://localhost:3000/)
