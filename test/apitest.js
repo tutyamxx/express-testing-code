@@ -41,7 +41,7 @@ describe("Testing API Endpoint Responses:", () =>
 
     describe("GET wind-forecast endpoint on /api/v1/wind-forecast", () =>
     {
-        it("Should return a message error and a status code of NOT FOUND (404)", (done) =>
+        it("Should return a message error and a status code of NOT FOUND (404) if there is no postcode specified", (done) =>
         {
             chai.request(app).get("/api/v1/wind-forecast").end((err, response) =>
             {
@@ -54,7 +54,7 @@ describe("Testing API Endpoint Responses:", () =>
             });
         });
 
-        it("Should return an empty array and a status code of OK (200)", (done) =>
+        it("Should return an empty array and a status code of OK (200) if there is a value passed as param", (done) =>
         {
             chai.request(app).get("/api/v1/wind-forecast/llllllll").end((err, response) =>
             {
@@ -67,7 +67,7 @@ describe("Testing API Endpoint Responses:", () =>
             });
         });
 
-        it("Should return a message containing an array of objects with wind forecast and a status code of OK (200) ", (done) =>
+        it("Should return a message containing an array of objects with wind forecast and a status code of OK (200) if there is a valid postcode specified", (done) =>
         {
             chai.request(app).get("/api/v1/wind-forecast/ls97ug").end((err, response) =>
             {
@@ -86,7 +86,7 @@ describe("Testing API Endpoint Responses:", () =>
 
     describe("GET unknown path", () =>
     {
-        it("Should return a message endpoint is not found with a status code of NOT FOUND (404)", (done) =>
+        it("Should return a message endpoint is not found with a status code of NOT FOUND (404) for endpoint /api/", (done) =>
         {
             chai.request(app).get("/api/").end((err, response) =>
             {
@@ -99,7 +99,7 @@ describe("Testing API Endpoint Responses:", () =>
             });
         });
 
-        it("Should return a message endpoint is not found with a status code of NOT FOUND (404)", (done) =>
+        it("Should return a message endpoint is not found with a status code of NOT FOUND (404) for endpoint /api/v2/", (done) =>
         {
             chai.request(app).get("/api/v2").end((err, response) =>
             {
@@ -112,7 +112,7 @@ describe("Testing API Endpoint Responses:", () =>
             });
         });
 
-        it("Should return a message endpoint is not found with a status code of NOT FOUND (404)", (done) =>
+        it("Should return a message endpoint is not found with a status code of NOT FOUND (404) for a randomly typed endpoint", (done) =>
         {
             chai.request(app).get("/api/dsadsad/v2/dsadasdsa").end((err, response) =>
             {
@@ -120,12 +120,20 @@ describe("Testing API Endpoint Responses:", () =>
                 expect(response.body).to.be.a("object");
                 expect(Object.keys(response.body).length).to.be.equal(2);
                 expect(response.body).to.have.a.property("message").and.to.be.a("string").and.to.be.equal("Sorry, can't access the endpoint you are looking for");
-
-                done();
             });
+
+            chai.request(app).get("/api/dsadsad/12312321/v2/api").end((err, response) =>
+            {
+                expect(response).to.have.status(404);
+                expect(response.body).to.be.a("object");
+                expect(Object.keys(response.body).length).to.be.equal(2);
+                expect(response.body).to.have.a.property("message").and.to.be.a("string").and.to.be.equal("Sorry, can't access the endpoint you are looking for");
+            });
+
+            done();
         });
     });
 
-    after(() => chai.request(app).close());
+    afterEach(() => chai.request(app).close());
 
 });
