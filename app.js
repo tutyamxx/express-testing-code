@@ -22,7 +22,7 @@ app.use(cors());
 // --| Enable Helmet to secure the API a bit for exploits
 app.use(helmet());
 
-// --| Version 1 of API in /api/ folder /v1/
+// --| Version 1 of API in folder /v1/
 // --| This way we can maintain the API in the future with other beta versions on /v2/ ?
 magic.use(app, { routesFolder: "routes", invokerPath: __dirname, allowSameName: true });
 
