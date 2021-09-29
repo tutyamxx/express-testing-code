@@ -7,11 +7,11 @@ chai.use(chaiHttp);
 
 describe("Testing API Endpoint Responses:", () =>
 {
-    describe("GET default path of the API /api/v1/", () =>
+    describe("GET default path of the API /v1/", () =>
     {
         it("Should return a message that it is working with a status code of OK (200)", (done) =>
         {
-            chai.request(app).get("/api/v1/").end((err, response) =>
+            chai.request(app).get("/v1/").end((err, response) =>
             {
                 expect(response).to.have.status(200);
                 expect(response.body).to.be.a("object");
@@ -23,11 +23,11 @@ describe("Testing API Endpoint Responses:", () =>
         });
     });
 
-    describe("GET hello-world endpoint on /api/v1/hello-world", () =>
+    describe("GET hello-world endpoint on /v1/hello-world", () =>
     {
         it("Should return a message that it is working with a status code of OK (200)", (done) =>
         {
-            chai.request(app).get("/api/v1/hello-world").end((err, response) =>
+            chai.request(app).get("/v1/hello-world").end((err, response) =>
             {
                 expect(response).to.have.status(200);
                 expect(response.body).to.be.a("object");
@@ -39,11 +39,11 @@ describe("Testing API Endpoint Responses:", () =>
         });
     });
 
-    describe("GET wind-forecast endpoint on /api/v1/wind-forecast", () =>
+    describe("GET wind-forecast endpoint on /v1/wind-forecast", () =>
     {
         it("Should return a message error and a status code of NOT FOUND (404) if there is no postcode specified", (done) =>
         {
-            chai.request(app).get("/api/v1/wind-forecast").end((err, response) =>
+            chai.request(app).get("/v1/wind-forecast").end((err, response) =>
             {
                 expect(response).to.have.status(404);
                 expect(response.body).to.be.a("object");
@@ -56,7 +56,7 @@ describe("Testing API Endpoint Responses:", () =>
 
         it("Should return an empty array and a status code of OK (200) if there is a value passed as param", (done) =>
         {
-            chai.request(app).get("/api/v1/wind-forecast/llllllll").end((err, response) =>
+            chai.request(app).get("/v1/wind-forecast/llllllll").end((err, response) =>
             {
                 expect(response).to.have.status(200);
                 expect(response.body).to.be.a("object");
@@ -69,7 +69,7 @@ describe("Testing API Endpoint Responses:", () =>
 
         it("Should return a message containing an array of objects with wind forecast and a status code of OK (200) if there is a valid postcode specified", (done) =>
         {
-            chai.request(app).get("/api/v1/wind-forecast/ls97ug").end((err, response) =>
+            chai.request(app).get("/v1/wind-forecast/ls97ug").end((err, response) =>
             {
                 expect(response).to.have.status(200);
                 expect(response.body).to.be.a("object");
@@ -101,7 +101,7 @@ describe("Testing API Endpoint Responses:", () =>
 
         it("Should return a message endpoint is not found with a status code of NOT FOUND (404) for endpoint /api/v2/", (done) =>
         {
-            chai.request(app).get("/api/v2").end((err, response) =>
+            chai.request(app).get("/v1/v2").end((err, response) =>
             {
                 expect(response).to.have.status(404);
                 expect(response.body).to.be.a("object");

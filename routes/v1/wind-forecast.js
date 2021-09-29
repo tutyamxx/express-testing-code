@@ -1,11 +1,10 @@
-const express = require("express");
-const router = express.Router();
+const router = require("express").Router();
 
 const apiStatus = require("../../utils/status.json");
 const { fetchFromAPI } = require("../../utils/axios-wrapper");
 
 // --| Wind forecast
-router.get("/wind-forecast/:postcode?", async (req, res, next) => {
+router.get("/:postcode?", async (req, res, next) => {
     const postCode = req.params.postcode;
 
     if (!postCode || typeof postCode !== "string" || !postCode.length) return res.status(apiStatus.not_found).json({ status: apiStatus.not_found, message: "Postcode not specified" });
@@ -43,4 +42,4 @@ router.get("/wind-forecast/:postcode?", async (req, res, next) => {
     });
 });
 
-module.exports.router = router;
+module.exports = router;

@@ -3,6 +3,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
 const helmet = require("helmet");
+const magic = require("express-routemagic");
 
 // --| Import our status codes from a JSON file
 const apiStatus = require("./utils/status.json");
@@ -23,8 +24,7 @@ app.use(helmet());
 
 // --| Version 1 of API in /api/ folder /v1/
 // --| This way we can maintain the API in the future with other beta versions on /v2/ ?
-const apiRoutes = require("./routes/v1/routes");
-app.use("/api/v1", apiRoutes.router);
+magic.use(app, { routesFolder: "routes", invokerPath: __dirname, allowSameName: true });
 
 // --| 404 Response
 app.use((req, res, next) => res.status(apiStatus.not_found).json({ status: apiStatus.not_found, message: "Sorry, can't access the endpoint you are looking for" }));
