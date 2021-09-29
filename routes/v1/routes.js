@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const apiStatus = require("../../utils/status.json");
 
 // --| Routing for GET endpoints
 router.get("/", require("./index.js").router);
